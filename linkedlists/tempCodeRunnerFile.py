@@ -1,2 +1,2 @@
-ll.reverse()
-# print(ll)
+print(f.data)
+        print(s.data)

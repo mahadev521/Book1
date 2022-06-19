@@ -231,17 +231,39 @@ class SLL:
                 return False
             cur=cur.next
         return True
+    
+    #using fast and slow algorithm
+    def delNthFromLast(self,n):
+        f=s=self.head
+        for _ in range(n):
+            f=f.next
+        if not f:
+            self.head=self.head.next
+            return
+        while f.next:
+            f=f.next
+            s=s.next
+        s.next=s.next.next
 
 ll=SLL()
+ll.extend([1,2])
+print(ll)
+ll.delNthFromLast(2)
+print(ll)
 
 
+
+
+# ll.extend([23,45,47,22,56,78,23,98,45,76,99])
+# print(ll)
+# ll.delNthFromLast(3)
+# print(ll)
 # ll.append(12)
 # ll.extend([23,45,66,76,87,98,109,120])
-ll.extend([23,44,54,44,23,45])
 # print(ll.isPalindrome())
-print(ll)
-ll.reverse()
-print(ll)
+# print(ll)
+# ll.reverse()
+# print(ll)
 # print(ll.getPos(66))
 # print(ll.length)
 
