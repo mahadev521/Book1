@@ -1,0 +1,2 @@
+ll.reverse()
+# print(ll)
