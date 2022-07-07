@@ -1,13 +1,11 @@
 '''singly linked list'''
-
-from errno import E2BIG
-
-
 class Node:
     def __init__(self, data, next=None):
         self.data = data
         self.next = None
-
+    
+    def __str__(self):
+        return f'{self.data},{self.next}'
 class SLL:
     def __init__(self):
         self.head = None
@@ -19,7 +17,7 @@ class SLL:
     def extend(self,arr):
         # extending the singly linked list
         cur= self.head
-        if cur==None:
+        if cur is None:
             self.head=Node(arr[0])
             cur=self.head
             if len(arr)>1:
@@ -27,7 +25,7 @@ class SLL:
                     self.length +=1
                     cur.next=Node(i)
                     cur=cur.next
-            self.length +=1 
+            self.length +=1
         else:
             while cur.next: 
                 cur=cur.next
@@ -35,8 +33,7 @@ class SLL:
                 self.length +=1
                 cur.next=Node(i)
                 cur=cur.next
-            
-        
+     
     # insert at beginning
     def ibegin(self, node):
         self.length += 1
@@ -48,7 +45,7 @@ class SLL:
     def iend(self, node):
         self.length += 1
         node = Node(node)
-        if self.head == None:
+        if self.head is None:
             self.head = node
             return
         else:
@@ -81,7 +78,7 @@ class SLL:
 
     #delete element at the head
     def delhead(self):
-        if self.head==None:
+        if self.head is None:
             print('there is no head')
             return
         else:
@@ -90,7 +87,7 @@ class SLL:
     
     # delete element at the tail
     def deltail(self):
-        if self.head==None:
+        if self.head is None:
             print('there is no tail')
             return
         else:
@@ -121,38 +118,40 @@ class SLL:
                 return
             cur = cur.next
 
-    
     #delete an element by value
-    def delele(self,val):
-        pos=self.getPos(val)
-        if pos!=-1:
-            self.delatpos(pos)
-        else:
-            print('element doesn\'t exist')
+    def delete(self,val):
+        cur=self.head
+        if cur.data==val:
+            self.head=cur.next
+            return
+        while cur.next.data!=val and cur.next.next:
+            cur=cur.next
+        cur.next=cur.next.next
     
     # get posotion of an element in the linked list
     def getPos(self,val):
         pos=1
         cur = self.head
-        while cur:
-            if cur.data==val:
-                return pos
+        while cur and cur.data!=val:
             cur = cur.next
             pos+=1
-        return -1
+        return pos if cur else -1
     
     # get value/ data at a position
     def getVal(self,pos):
-        count=1
         cur = self.head
+        # while pos>1:
+        #     cur=cur.next
+        #     if not cur: return -1
+        #     pos-=1
+        # return cur.data or -1
+        count=1
         while cur:
             if count==pos:
                 return cur.data
             cur = cur.next
             count+=1
         return -1
-        
-    
     # for updating a positions value
     def updatePosition(self,pos,val):
         cur=self.head
@@ -164,7 +163,6 @@ class SLL:
             count+=1
             cur=cur.next
     
-    
     #swap based on values
     def swapnodes(self,val1,val2):
         pos1= self.getPos(val1)
@@ -173,15 +171,13 @@ class SLL:
         self.updatePosition(pos2,val1)
     
     # based on index    
-    def swap(self,pos1,pos2):
+    def swap(self,pos1,pos2):    
         val1=self.getVal(pos1)
         val2=self.getVal(pos2)
         # print(val1,val2)
         # print(pos1,pos2)
         self.updatePosition(pos1,val2)
         self.updatePosition(pos2,val1)
-        
-    
     #display
     def __str__(self):
         s = []
@@ -191,33 +187,19 @@ class SLL:
             curr_node = curr_node.next
         return ' -> '.join(s)
         # return ' -> '.join(s[::-1]) #reverse printing
-    
     #get head value         
     def gethead(self):
         return self.head.data
     
-    def reverse(self):
-        # reversing the singly linked list
-        # print(self.length)
-        # for i in range(self.length//2):
-        #     self.swap(i+1,self.length-i)
-
-        # prev = None
-        # curr = self.head
-        # while curr:
-        #     nxt = curr.next
-        #     curr.next = prev
-        #     prev = curr
-        #     curr = nxt
-        # self.head = prev
-        prev=None
-        cur=self.head
-        while cur:
-            nxt=cur.next
-            cur.next=prev
-            prev=cur
-            cur=nxt
-        self.head = prev
+    # def reverse(self):
+    #     prev=None
+    #     cur=self.head
+    #     while cur:
+    #         nxt=cur.next
+    #         cur.next=prev
+    #         prev=cur
+    #         cur=nxt
+    #     self.head = prev
         
     def isPalindrome(self):
         rec=[]
@@ -244,60 +226,85 @@ class SLL:
             f=f.next
             s=s.next
         s.next=s.next.next
+# list1=Slist1()
+# list1.extend([1,2])
+# print(list1)
+# list1.delNthFromLast(2)
+# print(list1)
+
+def reverse(head):
+    if head is None or head.next is None:
+        return head
+    
+    end_of_reversed = head.next
+    reversed_sublist = reverse(head.next)
+    head.next = None
+    end_of_reversed.next = head
+    return reversed_sublist
 
 ll=SLL()
-ll.extend([1,2])
-print(ll)
-ll.delNthFromLast(2)
-print(ll)
+ll.extend([1,2,4,7,9,11,14,16,23])
+x=reverse(ll.head)
+print(x)
+# v=ll.getVal(0)
+# print(v)
+# print(ll.getPos(v))
+
+def merge(a,b):
+    if not a or b and a.data > b.data:a, b = b, a
+    if a: a.next = merge(a.next, b)
+    return a
+
+'''merging two sorted linked lists'''
+# list1=Slist1()
+# # list1.extend([])
+# list2=Slist1()
+# list2.extend([2,4,6,7,22,45,78,82,90,94,101])
+# print(merge(list1.head,list2.head))
+# list1.extend([23,45,47,22,56,78,23,98,45,76,99])
+# print(list1)
+# list1.delNthFromLast(3)
+# print(list1)
+# list1.append(12)
+# list1.extend([23,45,66,76,87,98,109,120])
+# print(list1.isPalindrome())
+# print(list1)
+# list1.reverse()
+# print(list1)
+# print(list1.getPos(66))
+# print(list1.length)
 
 
 
 
-# ll.extend([23,45,47,22,56,78,23,98,45,76,99])
-# print(ll)
-# ll.delNthFromLast(3)
-# print(ll)
-# ll.append(12)
-# ll.extend([23,45,66,76,87,98,109,120])
-# print(ll.isPalindrome())
-# print(ll)
-# ll.reverse()
-# print(ll)
-# print(ll.getPos(66))
-# print(ll.length)
+# list1.append(23)
+# list1.append(29)
+# list1.append(43)
+# list1.append(34)
+# list1.append(67)
+# list1.append(77)
+# list1.append(97)
+# list1.append(82)
+# print(list1)
+# list1.updatePosition(3,99)
+# print(list1)
+# list1.swapnodes(12,67)
+# print(list1)
 
 
 
+# list1.ibegin(45)
+# list1.iend(77)
+# list1.iatpos(34,2)
+# print(list1)
+# print(list1.length)
+# list1.delhead()
+# # list1.deltail()
+# # list1.delatpos(1)
 
-# ll.append(23)
-# ll.append(29)
-# ll.append(43)
-# ll.append(34)
-# ll.append(67)
-# ll.append(77)
-# ll.append(97)
-# ll.append(82)
-# print(ll)
-# ll.updatePosition(3,99)
-# print(ll)
-# ll.swapnodes(12,67)
-# print(ll)
-
-
-
-# ll.ibegin(45)
-# ll.iend(77)
-# ll.iatpos(34,2)
-# print(ll)
-# print(ll.length)
-# ll.delhead()
-# # ll.deltail()
-# # ll.delatpos(1)
-
-# # print(ll.getPos(34))
-# # ll.delele(34)
-# # ll.reverse()
-# print(ll)
+# # print(list1.getPos(34))
+# # list1.delele(34)
+# # list1.reverse()
+# print(list1)
 
 

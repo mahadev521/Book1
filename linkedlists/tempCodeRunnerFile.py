@@ -1,2 +1,2 @@
-print(f.data)
-        print(s.data)
+nums=[96,90,41,82,39,74,64,50,30]
+k=8

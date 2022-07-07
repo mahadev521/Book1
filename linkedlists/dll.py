@@ -7,8 +7,7 @@ class Node:
         self.prev = prev
     
     def __str__(self):
-        return str(self.data)
-
+        return f'{self.data} <-> {self.next}'
 class Dll:
     def __init__(self, head=None):
         self.head = head
@@ -89,16 +88,28 @@ class Dll:
             cur=cur.next
             count+=1
     
+    def getvalue(self,pos):
+        pos-=1
+        if pos>self.length:
+            return 'cannot get value'
+        cur=self.head
+        for _ in range(pos):
+            cur=cur.next
+        return cur.data
+    
+    def reverse(self):
+        cur=self.head
+        prev=None
+        while cur:
+            next=cur.next
+            cur.next=prev
+            cur.prev=next
+            prev=cur
+            cur=next
+        self.head=prev
     
     def __str__(self):
-        s=[]
-        cur=self.head
-        while cur:
-            s.append(str(cur.data))
-            cur=cur.next
-        return ' <-> '.join(s)
-
-
+        return f'{self.head}'
 
 # node=Node(45)
 # dll=Dll(node)
@@ -107,8 +118,12 @@ class Dll:
 # print(dll)
 
 dll=Dll()
-dll.extend([1,2,3,4,5,6])
+dll.extend([1,2,3,11,4,5,6])
 print(dll)
+dll.reverse()
+print(dll)
+# print(dll.getvalue(6))
+# print(dll.head)
 
 # dll.extend([11,12,13])
 # dll.addnode(14)

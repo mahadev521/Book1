@@ -1,13 +1,9 @@
-f=head
-s=head
-count=1
-while count<=n and f:
-    f=f.next
-    count+=1
-while f and f.next:
-    s=s.next
-    f=f.next
-if f:
-    s.next=s.next.next
-else:
-    head=None
+def fun():
+    l=[1,2,3]
+    return str((*l[::-1],sep='\n-\n'))
+#     return 0
+
+# # n=int(input())
+# # l=[eval(x) for x in input().split()]
+# n=10
+print(fun())
