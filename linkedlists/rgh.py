@@ -1,6 +1,6 @@
 def fun():
     l=[1,2,3]
-    return str((*l[::-1],sep='\n-\n'))
+    # return str((*l[::-1],sep='\n-\n'))
 #     return 0
 
 # # n=int(input())
