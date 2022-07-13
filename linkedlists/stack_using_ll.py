@@ -21,12 +21,6 @@ class Stack:
         if self.head is None:
             self.head=Node(val)
             return 
-        
-        # cur=self.head
-        # while cur.next:
-        #     cur=cur.next
-        # cur.next=Node(val)
-        
         node=Node(val)
         node.next=self.head
         self.head=node
@@ -38,10 +32,6 @@ class Stack:
         self.size-=1
         print(f'popped value is {self.head.data}')
         self.head=self.head.next
-        # cur=self.head
-        # while cur.next.next:
-        #     cur=cur.next
-        # cur.next=None
     
     def getSize(self):
         return self.size
@@ -55,22 +45,10 @@ class Stack:
         self.maxSize=newSize
         
     def display(self):
-        # follows lifo
         print(self.head)
-        # cur=self.head
-        # l=[]
-        # while cur:
-        #     l.append(str(cur.data))
-        #     cur=cur.next
 
     def getTop(self):
         return self.head.data
-    
-    def getTail(self):
-        cur=self.head
-        while cur.next:
-            cur=cur.next
-        return cur.data
     
     def clear(self):
         self.head=None

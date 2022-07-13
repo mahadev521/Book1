@@ -1,11 +1,14 @@
 '''singly linked list'''
+import re
+
+
 class Node:
-    def __init__(self, data, next=None):
+    def __init__(self, data=None, next=None):
         self.data = data
         self.next = None
     
     def __str__(self):
-        return f'{self.data},{self.next}'
+        return f'{self.data} -> {self.next}'
 class SLL:
     def __init__(self):
         self.head = None
@@ -235,25 +238,120 @@ class SLL:
 def reverse(head):
     if head is None or head.next is None:
         return head
+    rl=reverse(head.next)
+    head.next.next=head
+    head.next=None
+    return rl
+
+def rotate(head,k):
+    # if k==0: return head
+    # temp=head
+    # f,s=head,head
+    # for _ in range(k):
+    #     f=f.next
+    # while f:
+    #     s=s.next
+    #     f=f.next
+    # head=s
+    # print(s,temp,head)
+    if not k or not head or not head.next:
+        return head
+    cur=head
+    size=1
+    while cur.next:
+        size+=1
+        cur=cur.next
+    cur.next=head
+    k=k%size
+    k=size-k
+    while k:
+        cur=cur.next
+        k-=1
+    head=cur.next
+    cur.next=None
+    return head
     
-    end_of_reversed = head.next
-    reversed_sublist = reverse(head.next)
-    head.next = None
-    end_of_reversed.next = head
-    return reversed_sublist
-
-ll=SLL()
-ll.extend([1,2,4,7,9,11,14,16,23])
-x=reverse(ll.head)
-print(x)
-# v=ll.getVal(0)
-# print(v)
-# print(ll.getPos(v))
-
 def merge(a,b):
     if not a or b and a.data > b.data:a, b = b, a
     if a: a.next = merge(a.next, b)
     return a
+
+#recursively print elements from enting node
+def printRev(head):
+    if not head: return head
+    printRev(head.next)
+    print(head.data)
+
+def lenEven(head):
+    try:
+        while head:
+            head=head.next.next
+        return 'even'
+    except Exception:
+        return 'odd'
+    
+def merges(heada,headb):
+    '''3rd variable'''
+    # headc=Node()
+    # temp=headc
+    # while heada and headb:
+    #     if heada.data < headb.data:
+    #         headc.next=heada
+    #         heada=heada.next
+    #     else:
+    #         headc.next=headb
+    #         headb=headb.next
+    #     headc=headc.next
+    # headc.next=heada or headb
+    # return temp.next
+    
+    
+    temp=heada
+    while heada and headb:
+        if heada.data < headb.data:
+            print(heada.data,headb.data)
+            heada=heada.next
+        else:
+            heada=Node(999)
+            heada.next=None
+            break
+    print(temp)
+    print(heada)
+    # print(heada)
+    # while heada and headb:
+    #     # print(heada)
+    #     temp=heada
+    #     if heada.data<headb.data:
+    #         heada=heada.next
+        # else:
+        #     nxt=heada.next
+        #     heada.next=headb
+        #     heada.next.next=nxt
+            # # node=headb
+            # node.next=heada
+    # print(temp)
+    # heada.next= heada or headb
+    # return heada
+    
+ll=SLL()
+# ll.extend([1,2,4,7,9,11,16,23])
+ll.extend([1,2,5,6,7,8])
+ll2=SLL()
+ll2.extend([3])
+# ll2.extend([3,6,8,12,15,27,33,45])
+print(merges(ll.head, ll2.head))
+
+# x=reverse(ll.head)
+# printRev(ll.head)
+# print(lenEven(ll.head))
+
+# x=rotate(ll.head,3)
+# print(ll)
+
+# v=ll.getVal(0)
+# print(v)
+# print(ll.getPos(v))
+
 
 '''merging two sorted linked lists'''
 # list1=Slist1()
