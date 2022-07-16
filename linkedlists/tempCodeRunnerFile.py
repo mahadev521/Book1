@@ -1,2 +1,2 @@
 
-    # pointer=temp
+# cll.insert(2)

@@ -1,6 +1,4 @@
 '''singly linked list'''
-import re
-
 
 class Node:
     def __init__(self, data=None, next=None):
@@ -333,13 +331,39 @@ def merges(heada,headb):
     # heada.next= heada or headb
     # return heada
     
+'''swapping pairs'''
+def swapPairs(head):
+    # dummy = p = Node(0)
+    # dummy.next = head
+    # while head and head.next:
+    #     print(dummy,p,sep='\n',end='\n\n')
+    #     tmp = head.next
+    #     head.next = head.next.next
+    #     tmp.next = head
+    #     head = head.next
+    #     p.next = tmp
+    #     p = tmp.next
+    # print(dummy.next)
+    
+    dum=p=Node(0)
+    dum.next=head
+    while head and head.next:
+        temp=head.next
+        head.next=head.next.next
+        temp.next=head
+        head=head.next
+        p.next=temp
+        p=temp.next
+    print(dum.next)
+
 ll=SLL()
-# ll.extend([1,2,4,7,9,11,16,23])
 ll.extend([1,2,5,6,7,8])
-ll2=SLL()
-ll2.extend([3])
+swapPairs(ll.head)
+# ll.extend([1,2,4,7,9,11,16,23])
+# ll2=SLL()
+# ll2.extend([3])
 # ll2.extend([3,6,8,12,15,27,33,45])
-print(merges(ll.head, ll2.head))
+# print(merges(ll.head, ll2.head))
 
 # x=reverse(ll.head)
 # printRev(ll.head)
@@ -373,8 +397,6 @@ print(merges(ll.head, ll2.head))
 # print(list1.length)
 
 
-
-
 # list1.append(23)
 # list1.append(29)
 # list1.append(43)
@@ -389,8 +411,6 @@ print(merges(ll.head, ll2.head))
 # list1.swapnodes(12,67)
 # print(list1)
 
-
-
 # list1.ibegin(45)
 # list1.iend(77)
 # list1.iatpos(34,2)
@@ -399,10 +419,7 @@ print(merges(ll.head, ll2.head))
 # list1.delhead()
 # # list1.deltail()
 # # list1.delatpos(1)
-
 # # print(list1.getPos(34))
 # # list1.delele(34)
 # # list1.reverse()
 # print(list1)
-
-
