@@ -1,2 +1,2 @@
 
-# cll.insert(2)
+            return head

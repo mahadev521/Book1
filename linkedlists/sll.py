@@ -193,14 +193,14 @@ class SLL:
         return self.head.data
     
     # def reverse(self):
-    #     prev=None
-    #     cur=self.head
-    #     while cur:
-    #         nxt=cur.next
-    #         cur.next=prev
-    #         prev=cur
-    #         cur=nxt
-    #     self.head = prev
+        # prev=None
+        # cur=self.head
+        # while cur:
+        #     nxt=cur.next
+        #     cur.next=prev
+        #     prev=cur
+        #     cur=nxt
+        # self.head = prev
         
     def isPalindrome(self):
         rec=[]
@@ -333,32 +333,55 @@ def merges(heada,headb):
     
 '''swapping pairs'''
 def swapPairs(head):
-    # dummy = p = Node(0)
-    # dummy.next = head
+    '''iterative'''
+    # dum=p=Node(0)
+    # dum.next=head
     # while head and head.next:
-    #     print(dummy,p,sep='\n',end='\n\n')
-    #     tmp = head.next
-    #     head.next = head.next.next
-    #     tmp.next = head
-    #     head = head.next
-    #     p.next = tmp
-    #     p = tmp.next
-    # print(dummy.next)
+    #     temp=head.next
+    #     head.next=head.next.next
+    #     temp.next=head
+    #     head=head.next
+    #     p.next=temp
+    #     p=temp.next
+    # print(dum.next)
     
-    dum=p=Node(0)
-    dum.next=head
-    while head and head.next:
+    if head and head.next:
         temp=head.next
-        head.next=head.next.next
+        head.next=swapPairs(temp.next)
         temp.next=head
-        head=head.next
-        p.next=temp
-        p=temp.next
-    print(dum.next)
+        return temp
+    return head
+
+    # if head and head.next:
+    #     tmp = head.next
+    #     head.next = swapPairs(tmp.next)
+    #     tmp.next = head
+    #     return tmp
+    # return head
+
+def revKnodes(head,k):
+    #base case
+    ptr=head
+    for _ in range(k):
+        if ptr is None: return head
+        ptr=ptr.next
+    #snippet for reversing k nodes
+    cur=None
+    ptr=head
+    for _ in range(k):
+        nxt=ptr.next
+        ptr.next=cur
+        cur=ptr
+        ptr=nxt
+    # recursive call
+    head.next=revKnodes(ptr,k)
+    return cur
+
 
 ll=SLL()
 ll.extend([1,2,5,6,7,8])
-swapPairs(ll.head)
+# print(swapPairs(ll.head))
+print(revKnodes(ll.head,4))
 # ll.extend([1,2,4,7,9,11,16,23])
 # ll2=SLL()
 # ll2.extend([3])
