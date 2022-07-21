@@ -1,2 +1,3 @@
-x = tuple(range(10))
+import sys
+x=sys.stdin.readlines()
 print(x)

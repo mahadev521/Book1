@@ -7,13 +7,12 @@ class Node:
     
     def __str__(self):
         return f'{self.data} -> {self.next}'
+    
 class SLL:
     def __init__(self):
         self.head = None
         self.length = 0
 
-    def append(self,val):
-        self.iend(val)
 
     def extend(self,arr):
         # extending the singly linked list
@@ -35,6 +34,8 @@ class SLL:
                 cur.next=Node(i)
                 cur=cur.next
      
+    def append(self,val):
+        self.iend(val)
     # insert at beginning
     def ibegin(self, node):
         self.length += 1

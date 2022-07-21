@@ -23,13 +23,11 @@
 
 
 def po(x,n):
-    pro=1
+    if n==0: 
+        return 1
     if n<0:
-        x=1/x
-        n*=-1
-    dem=x*x
-    if n%2: pro*=x
-    for i in range(n//2):
-        pro*=dem
-    return dem
-
+        return 1/po(x,-n)
+    prod= pow(x,n//2)
+    return prod*prod*x if n%2!=0 else prod*prod
+    
+print(po(6,-5))
