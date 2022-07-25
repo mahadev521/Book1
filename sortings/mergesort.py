@@ -9,6 +9,7 @@ def conquer(arr,si,mid,ei):
     left=arr[si:mid+1]
     right=arr[mid+1:ei+1]
     i,j,k=0,0,si
+    # while i<=mid-si and j<=ei-mid-1:
     while i<len(left) and j<len(right):
         if left[i]<right[j]:
             arr[k]=left[i]
@@ -26,7 +27,6 @@ def conquer(arr,si,mid,ei):
         j+=1
         k+=1
     return arr
-
 
 arr=[6,3,9,5,2,8]
 divide(arr,0,len(arr)-1)
